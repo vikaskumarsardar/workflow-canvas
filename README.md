@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ⚡ AI Pipeline Studio — Interactive Node Canvas
 
-## Getting Started
+> A sleek, enterprise-grade visual workflow automation builder built with **Next.js 16**, **React Flow**, **Zustand**, **Framer Motion**, and **Tailwind CSS**.
 
-First, run the development server:
+🌐 **Live Demo**: [https://workflow-canvas-tawny.vercel.app/](https://workflow-canvas-tawny.vercel.app/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- 🎯 **Interactive Workflow Canvas**: Node-based canvas supporting dynamic cable connections, custom node types, drag-and-drop mechanics, and detach controls.
+- 🤖 **Custom Pipeline Node Catalog**:
+  - **⚡ Event Trigger**: Webhook / Cron event listeners with live cURL code generators.
+  - **🤖 AI Agent Processor**: LLM agent node configurable for GPT-4o, Claude 3.5 Sonnet, and Llama 3 with temperature controls.
+  - **🌐 HTTP Request**: Configurable REST API GET / POST / PUT / DELETE dispatcher.
+  - **🎛️ JSON Data Mapper**: Interactive transform script mapper.
+  - **Audit Inspector**: Formatted JSON audit payload inspector.
+- 🎨 **Enterprise Dual Theme System**:
+  - Dark mode (`#090A0E`) and high-contrast Stripe/Linear-style Light mode (`#F8FAFC`).
+  - Powered by `useSyncExternalStore` and inline `<head>` scripts for zero-flicker FOUC prevention.
+- 📂 **Multi-Flow Canvas Workspace**: Switch between multiple saved workflow canvases or create and delete custom flows on the fly.
+- 📡 **Live Telemetry & Execution Modal**: Real-time step-by-step workflow execution simulation with event logs modal (`⌘K`).
+- ⌨️ **Keyboard Shortcuts**:
+  - `⌘R` / `Ctrl+R`: Execute pipeline workflow.
+  - `⌘K` / `Ctrl+K`: Toggle live execution telemetry modal.
+- 🛠️ **Clean & Type-Safe Codebase**: Built with zero magic strings, centralized node constants, and `cn()` utility class merging (`clsx` + `tailwind-merge`).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🛠️ Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+| Technology | Role |
+| :--- | :--- |
+| **[Next.js 16](https://nextjs.org)** | React Framework (App Router & Turbopack) |
+| **[@xyflow/react](https://reactflow.dev)** | Node-Based Interactive Canvas Engine |
+| **[Zustand](https://zustand.docs.pmnd.rs)** | Global Workflow & Canvas State Management |
+| **[Framer Motion](https://www.framer.com/motion/)** | Smooth Animations & Modal Transitions |
+| **[Tailwind CSS](https://tailwindcss.com)** | Utility-First Modern CSS Styling |
+| **[Lucide React](https://lucide.dev)** | Enterprise Icon Suite |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🚀 Getting Started
 
-## Deploy on Vercel
+### Prerequisites
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Node.js**: `v18.0.0` or higher
+- **npm** or **yarn** / **pnpm**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Installation
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/vikaskumarsardar/workflow-canvas.git
+   cd workflow-canvas
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**:
+   ```bash
+   npm run dev
+   ```
+
+4. Open `http://localhost:3005` (or `http://localhost:3000`) in your browser to view the interactive studio.
+
+---
+
+## 📄 License
+
+This project is open-source and available under the [MIT License](LICENSE).
