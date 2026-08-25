@@ -1,21 +1,21 @@
 import { NodeType, NodeStatus } from '@/types/workflow';
 
 // Node Types Registry
-export const NODE_TYPES: Record<string, NodeType> = {
+export const NODE_TYPES = {
   TRIGGER: 'trigger',
   AI_PROMPT: 'ai_prompt',
   HTTP_REQUEST: 'http_request',
   TRANSFORM: 'transform',
   OUTPUT: 'output',
-} as const;
+} as const satisfies Record<string, NodeType>;
 
 // Execution Statuses
-export const NODE_STATUS: Record<string, NodeStatus> = {
+export const NODE_STATUS = {
   IDLE: 'idle',
   RUNNING: 'running',
   SUCCESS: 'success',
   ERROR: 'error',
-} as const;
+} as const satisfies Record<string, NodeStatus>;
 
 // Default Node Type Labels
 export const DEFAULT_NODE_LABELS: Record<NodeType, string> = {

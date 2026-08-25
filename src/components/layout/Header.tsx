@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { useWorkflowStore } from '@/store/useWorkflowStore';
 import { useTheme } from '@/components/theme/ThemeProvider';
+import { cn } from '@/lib/utils';
 
 export function Header({ onOpenLogs }: { onOpenLogs: () => void }) {
   const {
@@ -35,7 +36,7 @@ export function Header({ onOpenLogs }: { onOpenLogs: () => void }) {
     deleteFlow,
   } = useWorkflowStore();
 
-  const { theme, toggleTheme } = useTheme();
+  const { theme, isDark, toggleTheme } = useTheme();
 
   const [isFlowDropdownOpen, setIsFlowDropdownOpen] = useState(false);
   const activeFlow = flows.find((f) => f.id === activeFlowId) || flows[0];
@@ -98,11 +99,12 @@ export function Header({ onOpenLogs }: { onOpenLogs: () => void }) {
                         switchFlow(flow.id);
                         setIsFlowDropdownOpen(false);
                       }}
-                      className={`group flex items-center justify-between rounded-lg px-2.5 py-2 cursor-pointer transition-colors ${
+                      className={cn(
+                        "group flex items-center justify-between rounded-lg px-2.5 py-2 cursor-pointer transition-colors",
                         flow.id === activeFlowId
-                          ? 'bg-indigo-500/10 text-indigo-300 border border-indigo-500/20'
-                          : 'text-slate-300 hover:bg-[#161824]'
-                      }`}
+                          ? "bg-indigo-500/10 text-indigo-300 border border-indigo-500/20"
+                          : "text-slate-300 hover:bg-[#161824]"
+                      )}
                     >
                       <div className="flex flex-col min-w-0 pr-2">
                         <div className="flex items-center gap-1.5">
@@ -158,11 +160,11 @@ export function Header({ onOpenLogs }: { onOpenLogs: () => void }) {
         {/* Theme Mode Toggle (Sun/Moon) */}
         <button
           onClick={toggleTheme}
-          aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-          title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} mode`}
+          aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
+          title={`Switch to ${isDark ? 'Light' : 'Dark'} mode`}
           className="flex items-center justify-center rounded-lg border border-[#1C1F2B] bg-[#12141A] p-2 text-slate-400 transition-all hover:border-indigo-500/40 hover:bg-[#181B24] hover:text-indigo-400 focus:outline-none focus:ring-1 focus:ring-indigo-500"
         >
-          {theme === 'dark' ? <Sun className="h-3.5 w-3.5 text-amber-400" /> : <Moon className="h-3.5 w-3.5 text-indigo-400" />}
+          {isDark ? <Sun className="h-3.5 w-3.5 text-amber-400" /> : <Moon className="h-3.5 w-3.5 text-indigo-400" />}
         </button>
 
         <button
@@ -178,13 +180,14 @@ export function Header({ onOpenLogs }: { onOpenLogs: () => void }) {
           whileTap={{ scale: 0.98 }}
           onClick={runWorkflow}
           disabled={isExecuting}
-          className={`flex items-center gap-2 rounded-lg border px-4 py-1.5 text-xs font-semibold shadow-lg transition-all ${
+          className={cn(
+            "flex items-center gap-2 rounded-lg border px-4 py-1.5 text-xs font-semibold shadow-lg transition-all",
             isExecuting
-              ? 'border-emerald-500/30 bg-emerald-500/20 text-emerald-400 opacity-70 cursor-not-allowed'
-              : 'border-indigo-500/40 bg-indigo-600 text-white shadow-indigo-600/25 hover:bg-indigo-500'
-          }`}
+              ? "border-emerald-500/30 bg-emerald-500/20 text-emerald-400 opacity-70 cursor-not-allowed"
+              : "border-indigo-500/40 bg-indigo-600 text-white shadow-indigo-600/25 hover:bg-indigo-500"
+          )}
         >
-          <Play className={`h-3.5 w-3.5 ${isExecuting ? 'animate-spin' : 'fill-white'}`} />
+          <Play className={cn("h-3.5 w-3.5", isExecuting ? "animate-spin" : "fill-white")} />
           <span>{isExecuting ? 'Executing Workflow...' : 'Run Pipeline'}</span>
           <kbd className="hidden rounded bg-indigo-700/50 px-1.5 py-0.5 text-[9px] font-mono font-normal text-indigo-200 md:inline-block">
             ⌘R

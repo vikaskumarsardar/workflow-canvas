@@ -5,6 +5,7 @@ import { BaseEdge, EdgeProps, getBezierPath, EdgeLabelRenderer } from '@xyflow/r
 import { X } from 'lucide-react';
 import { useWorkflowStore } from '@/store/useWorkflowStore';
 import { EDGE_CONFIG } from '@/constants/workflow';
+import { cn } from '@/lib/utils';
 
 export function AnimatedEdge({
   id,
@@ -74,9 +75,10 @@ export function AnimatedEdge({
               deleteEdge(id);
             }}
             title="Detach / Remove Connection"
-            className={`flex h-5 w-5 items-center justify-center rounded-full border border-rose-500/40 bg-[#12141A] text-rose-400 shadow-lg backdrop-blur-md transition-all duration-150 hover:scale-125 hover:bg-rose-600 hover:text-white ${
-              selected ? 'opacity-100 scale-110' : 'opacity-0 group-hover:opacity-100'
-            }`}
+            className={cn(
+              "flex h-5 w-5 items-center justify-center rounded-full border border-rose-500/40 bg-[#12141A] text-rose-400 shadow-lg backdrop-blur-md transition-all duration-150 hover:scale-125 hover:bg-rose-600 hover:text-white",
+              selected ? "opacity-100 scale-110" : "opacity-0 group-hover:opacity-100"
+            )}
           >
             <X className="h-3 w-3" />
           </button>

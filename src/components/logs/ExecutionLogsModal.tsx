@@ -4,6 +4,8 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Terminal, CheckCircle2, AlertCircle, Info } from 'lucide-react';
 import { useWorkflowStore } from '@/store/useWorkflowStore';
+import { NODE_STATUS } from '@/constants/workflow';
+import { cn } from '@/lib/utils';
 
 export function ExecutionLogsModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const { executionLogs } = useWorkflowStore();
@@ -16,13 +18,13 @@ export function ExecutionLogsModal({ isOpen, onClose }: { isOpen: boolean; onClo
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+        className={cn("fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4")}
       >
         <motion.div
           initial={{ scale: 0.95, y: 10 }}
           animate={{ scale: 1, y: 0 }}
           exit={{ scale: 0.95, y: 10 }}
-          className="flex h-[500px] w-full max-w-2xl flex-col rounded-2xl border border-[#1C1F2B] bg-[#0C0E14] shadow-2xl overflow-hidden"
+          className={cn("flex h-[500px] w-full max-w-2xl flex-col rounded-2xl border border-[#1C1F2B] bg-[#0C0E14] shadow-2xl overflow-hidden")}
         >
           {/* Header */}
           <div className="flex items-center justify-between border-b border-[#1C1F2B] px-5 py-3.5 bg-[#12141C]">
@@ -56,10 +58,10 @@ export function ExecutionLogsModal({ isOpen, onClose }: { isOpen: boolean; onClo
                 >
                   <span className="text-[10px] text-slate-500 shrink-0">{log.timestamp}</span>
 
-                  {log.status === 'success' && (
+                  {log.status === NODE_STATUS.SUCCESS && (
                     <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
                   )}
-                  {log.status === 'error' && (
+                  {log.status === NODE_STATUS.ERROR && (
                     <AlertCircle className="h-4 w-4 text-rose-400 shrink-0 mt-0.5" />
                   )}
                   {log.status === 'info' && (

@@ -2,10 +2,16 @@
 
 import React, { createContext, useContext, useSyncExternalStore } from 'react';
 
-type Theme = 'dark' | 'light';
+export const THEME_MODE = {
+  DARK: 'dark',
+  LIGHT: 'light',
+} as const;
+
+export type Theme = (typeof THEME_MODE)[keyof typeof THEME_MODE];
 
 interface ThemeContextType {
   theme: Theme;
+  isDark: boolean;
   toggleTheme: () => void;
   setTheme: (theme: Theme) => void;
 }
@@ -18,36 +24,37 @@ const subscribe = (callback: () => void) => {
 };
 
 const getSnapshot = (): Theme => {
-  if (typeof window === 'undefined') return 'dark';
+  if (typeof window === 'undefined') return THEME_MODE.DARK;
   const stored = localStorage.getItem('theme') as Theme | null;
   if (stored) return stored;
-  return document.documentElement.classList.contains('light') ? 'light' : 'dark';
+  return document.documentElement.classList.contains(THEME_MODE.LIGHT) ? THEME_MODE.LIGHT : THEME_MODE.DARK;
 };
 
-const getServerSnapshot = (): Theme => 'dark';
+const getServerSnapshot = (): Theme => THEME_MODE.DARK;
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const isDark = theme === THEME_MODE.DARK;
 
   const setTheme = (newTheme: Theme) => {
     localStorage.setItem('theme', newTheme);
-    if (newTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-      document.documentElement.classList.remove('light');
+    if (newTheme === THEME_MODE.DARK) {
+      document.documentElement.classList.add(THEME_MODE.DARK);
+      document.documentElement.classList.remove(THEME_MODE.LIGHT);
     } else {
-      document.documentElement.classList.add('light');
-      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add(THEME_MODE.LIGHT);
+      document.documentElement.classList.remove(THEME_MODE.DARK);
     }
     // Dispatch storage event so useSyncExternalStore updates across listeners
     window.dispatchEvent(new Event('storage'));
   };
 
   const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
+    setTheme(isDark ? THEME_MODE.LIGHT : THEME_MODE.DARK);
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
+    <ThemeContext.Provider value={{ theme, isDark, toggleTheme, setTheme }}>
       {children}
     </ThemeContext.Provider>
   );
@@ -60,3 +67,4 @@ export function useTheme() {
   }
   return context;
 }
+

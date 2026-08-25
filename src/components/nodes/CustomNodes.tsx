@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { Zap, Bot, Globe, Sliders, CheckCircle2, AlertCircle, Loader2, Copy, Check } from 'lucide-react';
 import { WorkflowNodeData } from '@/types/workflow';
 import { NODE_STATUS, BADGE_THEMES, DEFAULT_CONFIGS } from '@/constants/workflow';
+import { cn } from '@/lib/utils';
 
 type CustomNodeProps = NodeProps<Node<WorkflowNodeData>>;
 
@@ -36,13 +37,14 @@ function NodeShell({
     <motion.div
       initial={{ scale: 0.95, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
-      className={`relative min-w-[260px] rounded-xl border bg-[#12141A]/95 p-4 shadow-2xl backdrop-blur-xl transition-colors duration-200 ${
+      className={cn(
+        "relative min-w-[260px] rounded-xl border bg-[#12141A]/95 p-4 shadow-2xl backdrop-blur-xl transition-colors duration-200",
         selected
-          ? 'border-indigo-500 ring-2 ring-indigo-500/20 shadow-indigo-500/10'
+          ? "border-indigo-500 ring-2 ring-indigo-500/20 shadow-indigo-500/10"
           : isRunning
-          ? 'border-emerald-500 ring-2 ring-emerald-500/20'
-          : 'border-[#1E2230] hover:border-slate-700'
-      }`}
+          ? "border-emerald-500 ring-2 ring-emerald-500/20"
+          : "border-[#1E2230] hover:border-slate-700"
+      )}
     >
       {/* Header Bar */}
       <div className="flex items-center justify-between gap-3 border-b border-[#1E2230] pb-3 mb-3">
@@ -57,7 +59,7 @@ function NodeShell({
 
         <div className="flex items-center gap-2">
           {badge && (
-            <span className={`rounded-md border px-2 py-0.5 text-[10px] font-mono font-medium ${badgeColor}`}>
+            <span className={cn("rounded-md border px-2 py-0.5 text-[10px] font-mono font-medium", badgeColor)}>
               {badge}
             </span>
           )}

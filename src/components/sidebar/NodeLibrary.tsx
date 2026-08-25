@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 import { Zap, Bot, Globe, Sliders, CheckCircle2, Plus, Sparkles } from 'lucide-react';
 import { useWorkflowStore } from '@/store/useWorkflowStore';
 import { NodeType } from '@/types/workflow';
+import { NODE_TYPES } from '@/constants/workflow';
+import { cn } from '@/lib/utils';
 
 const nodeTemplates: {
   type: NodeType;
@@ -15,7 +17,7 @@ const nodeTemplates: {
   badge: string;
 }[] = [
   {
-    type: 'trigger',
+    type: NODE_TYPES.TRIGGER,
     title: 'Event Trigger',
     description: 'Webhook, Cron or API event listener',
     icon: Zap,
@@ -23,7 +25,7 @@ const nodeTemplates: {
     badge: 'START',
   },
   {
-    type: 'ai_prompt',
+    type: NODE_TYPES.AI_PROMPT,
     title: 'AI Agent Processor',
     description: 'GPT-4o or Claude prompt agent',
     icon: Bot,
@@ -31,7 +33,7 @@ const nodeTemplates: {
     badge: 'AI',
   },
   {
-    type: 'http_request',
+    type: NODE_TYPES.HTTP_REQUEST,
     title: 'HTTP Request',
     description: 'External REST API GET/POST dispatch',
     icon: Globe,
@@ -39,7 +41,7 @@ const nodeTemplates: {
     badge: 'API',
   },
   {
-    type: 'transform',
+    type: NODE_TYPES.TRANSFORM,
     title: 'Data Mapper',
     description: 'JSON transform script & filter',
     icon: Sliders,
@@ -47,7 +49,7 @@ const nodeTemplates: {
     badge: 'MAPPER',
   },
   {
-    type: 'output',
+    type: NODE_TYPES.OUTPUT,
     title: 'Debug Inspector',
     description: 'Output preview & audit logger',
     icon: CheckCircle2,
@@ -100,7 +102,7 @@ export function NodeLibrary() {
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
-                  <div className={`flex h-7 w-7 items-center justify-center rounded-lg border ${item.color}`}>
+                  <div className={cn("flex h-7 w-7 items-center justify-center rounded-lg border", item.color)}>
                     <Icon className="h-3.5 w-3.5" />
                   </div>
                   <span className="text-xs font-semibold text-slate-100 group-hover:text-white">
